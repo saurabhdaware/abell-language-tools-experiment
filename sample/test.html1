@@ -1,8 +1,15 @@
 <!-- type any css in following block to get css completion -->
-<style>.foo { c }</style>
+<style>.foo { color: red; }</style>
 
 <!-- custom diagnosis: Only one style tag is allowed. -->
-<style></style>
 
-<!-- type ">" to trigger auto close --> 
-<div
+<h1>Hi</h1>
+
+<typescript>
+import { message } from './test';
+
+type Val = 'hi' | 'hello';
+const val: Val = 'hello'
+console.log(message)
+
+</typescript>

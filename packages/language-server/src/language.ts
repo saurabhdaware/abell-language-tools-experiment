@@ -75,6 +75,29 @@ export class Html1File implements VirtualFile {
 					embeddedFiles: [],
 				});
 			}
+
+			if (root.tag === 'typescript' && root.startTagEnd !== undefined && root.endTagStart !== undefined) {
+				const tsText = this.snapshot.getText(root.startTagEnd, root.endTagStart);
+				this.embeddedFiles.push({
+					fileName: this.fileName + `.ts`,
+					kind: FileKind.TypeScriptHostFile,
+					snapshot: {
+						getText: (start, end) => tsText.substring(start, end),
+						getLength: () => tsText.length,
+						getChangeRange: () => undefined,
+					},
+					mappings: [{
+						sourceRange: [root.startTagEnd, root.endTagStart],
+						generatedRange: [0, tsText.length],
+						data: FileRangeCapabilities.full,
+					}],
+					codegenStacks: [],
+					capabilities: {...FileCapabilities.full,foldingRange: false,
+						documentSymbol: false,
+						documentFormatting: false},
+					embeddedFiles: [],
+				});
+			}
 		});
 	}
 }

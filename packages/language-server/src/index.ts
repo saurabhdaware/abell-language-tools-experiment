@@ -2,10 +2,13 @@ import { language, Html1File } from './language';
 import createEmmetService from 'volar-service-emmet';
 import createHtmlService from 'volar-service-html';
 import createCssService from 'volar-service-css';
+import createTsService from 'volar-service-typescript';
+
 import { createConnection, startLanguageServer, LanguageServerPlugin, Diagnostic, Service } from '@volar/language-server/node';
 
 const plugin: LanguageServerPlugin = (): ReturnType<LanguageServerPlugin> => ({
 	extraFileExtensions: [{ extension: 'html1', isMixedContent: true, scriptKind: 7 }],
+	watchFileExtensions: ['ts', 'html1'],
 	resolveConfig(config) {
 
 		// languages
@@ -16,6 +19,7 @@ const plugin: LanguageServerPlugin = (): ReturnType<LanguageServerPlugin> => ({
 		config.services ??= {};
 		config.services.html ??= createHtmlService();
 		config.services.css ??= createCssService();
+		config.services.typescript ??= createTsService();
 		config.services.emmet ??= createEmmetService();
 		config.services.html1 ??= (context): ReturnType<Service> => ({
 			provideDiagnostics(document) {

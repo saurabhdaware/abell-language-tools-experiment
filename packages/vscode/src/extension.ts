@@ -25,7 +25,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	};
 	const initializationOptions: InitializationOptions = {
 		// no need tsdk because html1 language server do not needed TS support, you can uncomment this line if needed
-		// typescript: { tsdk: require('path').join(vscode.env.appRoot, 'extensions/node_modules/typescript/lib') },
+		typescript: { tsdk: require('path').join(vscode.env.appRoot, 'extensions/node_modules/typescript/lib') },
 	};
 	const clientOptions: lsp.LanguageClientOptions = {
 		documentSelector: [{ language: 'html1' }],
